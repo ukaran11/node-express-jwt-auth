@@ -6,11 +6,13 @@ const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 const app = express();
-const PORT = 3004
+const PORT = 3000
 const dbURI = process.env.CONNECTION_URL;
 console.log(dbURI)
+
 // middleware
 app.use(express.static('public'));
+app.use(express.json());
 
 // view engine
 app.set('view engine', 'ejs');
