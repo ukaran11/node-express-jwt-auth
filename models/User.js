@@ -27,6 +27,20 @@ userSchema.pre('save', async function(next) {
     next();
 })
 
+userSchema.statics.login = async function(email, password) {
+    const user = await this.findOne({ email });
+    // console.log("inside statics")
+    if(user) {
+        const auth = await bcrypt.compare(password, user.password);
+        if (auth) {
+            return user;
+        }
+        throw Error('incorrect password');
+    }
+     
+    throw Error('incorrect email');
+}
+
 // fire a function after doc saved to db
 // userSchema.post('save', (doc, next) => {
 //     console.log('new user was created and saved', doc)
