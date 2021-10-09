@@ -25,7 +25,7 @@ const checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
 
     if(token) {
-        jwt.verify(token, 'net ninja secret', (err, decodedToken) => {
+        jwt.verify(token, 'net ninja secret', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
                 res.locals.user = null;
@@ -43,4 +43,4 @@ const checkUser = (req, res, next) => {
     }
 }
 
-module.exports = { requireAuth };
+module.exports = { requireAuth, checkUser };
